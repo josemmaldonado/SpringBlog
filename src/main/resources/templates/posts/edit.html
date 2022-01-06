@@ -1,19 +1,26 @@
 <!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <title>Title</title>
-</head>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head th:replace="partials :: head"/>
 <body>
-<form action="/posts/create" method="post">
+<nav th:replace="partials :: navbar"></nav>
+
+
+<form action="/posts/edit/" method="post">
     Title:
-    <input name="title" />
+    <input name="postTitle" th:value="${postToEdit.getTitle()}" />
+
     <br />
-    Body:
-    <input name="body" />
-    <br />
-    <input type="submit" />
+
+    <div class="form-group">
+        <label for="exampleFormControlTextarea1">Body</label>
+        <input class="form-control" id="exampleFormControlTextarea1" rows="3"
+        name="postBody" th:value="${postToEdit.getBody()}" />
+        <input name="postId" type="hidden" th:value="${postToEdit.getId()}">
+    </div>
+    <button type="submit" class="btn btn-primary">Edit</button>
 </form>
 
+
+<script th:replace="partials::script"/>
 </body>
 </html>

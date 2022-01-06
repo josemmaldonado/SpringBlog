@@ -1,10 +1,20 @@
 <!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org">
-<head>
-    <meta charset="UTF-8">
-    <title>Title</title>
-</head>
-<body>
 
+    <head th:replace="partials :: head"/>
+
+<body>
+<nav th:replace="partials :: navbar"></nav>
+<div th:each="post: ${posts}">
+<h1 th:text="${post.title}"/>
+<p th:text="${post.body}"/>
+   <form th:action=" '/posts/edit/' + ${post.getId()}" method="get">
+    <button class="btn btn-primary">Edit</button>
+   </form>
+    <form th:action="'/posts/delete/' + ${post.getId()}" method="post">
+    <button class="btn btn-danger">Delete</button>
+    </form>
+</div>
+<script th:replace="partials::script"/>
 </body>
 </html>

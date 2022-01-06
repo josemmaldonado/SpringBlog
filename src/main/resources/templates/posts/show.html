@@ -1,10 +1,14 @@
 <!DOCTYPE html>
-<html xmlns:th="http://www.thymeleaf.org">
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
 <head>
+    <head th:replace="partials :: head"/>
     <meta charset="UTF-8">
     <title>Title</title>
 </head>
 <body>
+<nav th:replace="partials :: navbar"></nav>
 
+This be my show page. Shown up
+<script th:replace="partials::script"/>
 </body>
 </html>

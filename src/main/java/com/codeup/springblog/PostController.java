@@ -25,8 +25,41 @@ public class PostController {
 
     @GetMapping(path = "/posts/{id}")
 
-    public String individualPost() {
-        return "view an individual post";
+    public String individualPost(@PathVariable long id) {
+        return "posts/show";
+    }
+
+    @GetMapping(path = "/posts/edit/{id}")
+    public String editPost(@PathVariable long id, Model model){
+        Post editPost = postDao.getById(id);
+        model.addAttribute("postToEdit", editPost);
+
+        return "posts/edit";
+
+    }
+
+    @PostMapping(path = "/posts/edit/")
+    public String saveEditPost(@RequestParam(name="postId") long id,
+                               @RequestParam(name="postTitle")String postTitle,
+                               @RequestParam(name="postBody")String postBody,
+                               Model model)
+                               {
+        Post editPost = postDao.getById(id);
+
+        editPost.setBody(postBody);
+        editPost.setTitle(postTitle);
+        postDao.save(editPost);
+
+
+        return "redirect:/posts";
+    }
+
+
+    @PostMapping("/posts/delete/{id}")
+    public String deletePost(@PathVariable Long id){
+        long deletePostId = id;
+        postDao.deleteById(deletePostId);
+        return "redirect:/posts";
     }
 
     @GetMapping(path = "/posts/create")
@@ -44,7 +77,7 @@ public class PostController {
         Post post = new Post();
         post.setTitle(title);
         post.setBody(body);
-        return "posts/index";
+        return "redirect:/posts";
     }
 }
 

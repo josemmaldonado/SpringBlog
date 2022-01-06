@@ -1,7 +1,6 @@
 package com.codeup.springblog;
 import javax.persistence.*;
 
-import org.apache.catalina.User;
 import org.springframework.boot.autoconfigure.security.SecurityProperties;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
@@ -11,10 +10,17 @@ public class Post {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private long id;
 
+    public long getId() {
+        return id;
+    }
 
-    @Column(nullable = false, length = 255)
+    public void setId(long id) {
+        this.id = id;
+    }
+
+    @Column(nullable = false, length = 1000)
     private String body;
-
+//    @ManyToOne
     public Post() {
     }
 
@@ -36,6 +42,8 @@ public class Post {
 
     @Column(nullable = false, length = 255)
     private String title;
+    @OneToOne
+    private User owner;
 
 
 }
