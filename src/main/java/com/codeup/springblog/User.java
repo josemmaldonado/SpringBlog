@@ -1,6 +1,7 @@
 package com.codeup.springblog;
 
 import javax.persistence.*;
+import java.util.List;
 
 @Entity
 public class User {
@@ -16,7 +17,10 @@ public class User {
     public void setId(long id) {
         this.id = id;
     }
-    @OneToMany
+    @OneToMany(cascade = CascadeType.ALL, mappedBy = "username")
+//    @JoinColumn (name="post_id")
+    private List<Post> post;
+
     public String getUsername() {
         return username;
     }
@@ -42,6 +46,7 @@ public class User {
     }
 
     @Column(nullable = false, length = 100)
+
     private String username;
 
     @Column(nullable = false, length = 255)
@@ -50,5 +55,14 @@ public class User {
     @Column(nullable = false, length = 255)
     private String password;
 
+    @OneToMany(mappedBy = "username")
+    private List<Post> userPosts;
+
+//    public User (User copy){
+//        id=copy.id;
+//        email = copy.email;
+//        username = copy.username;
+//        password = copy.password;
+//    }
 
 }

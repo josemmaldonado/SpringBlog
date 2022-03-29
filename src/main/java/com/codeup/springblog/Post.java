@@ -1,9 +1,6 @@
 package com.codeup.springblog;
 import javax.persistence.*;
 
-import org.springframework.boot.autoconfigure.security.SecurityProperties;
-import org.springframework.stereotype.Controller;
-import org.springframework.web.bind.annotation.*;
 @Entity
 public class Post {
     @Id
@@ -22,6 +19,8 @@ public class Post {
     private String body;
 //    @ManyToOne
     public Post() {
+//        @ManyToOne(cascade = CascadeType.ALL, ) List<Post> postList;
+
     }
 
     public String getBody() {
@@ -42,8 +41,38 @@ public class Post {
 
     @Column(nullable = false, length = 255)
     private String title;
-    @OneToOne
-    private User owner;
+    @ManyToOne
+    private User username;
 
+    public User getUsername() {
+        return username;
+    }
 
+    public void setUsername(User username) {
+        this.username = username;
+    }
+
+//    @Service("mailService")
+//    public class EmailService{
+//        @Autowired
+//        public JavaMailSender emailSender;
+//        @Value("${spring.mail.from}")
+//        private String from;
+//
+//        public void prepareAndSend( Post post, String subject, String body){
+//            SimpleMailMessage msg = new SimpleMailMessage();
+//            msg.setFrom(from);
+//            msg.setTo(post.getUsername().getEmail());
+//            msg.setSubject(subject);
+//            msg.setText(body);
+//
+//            try{
+//                this.email.Sender.send(msg);
+//            }
+//            catch (MailException ex) {
+//                System.err.println(ex.getMessage());
+//            }
+//        }
+//
+//    }
 }

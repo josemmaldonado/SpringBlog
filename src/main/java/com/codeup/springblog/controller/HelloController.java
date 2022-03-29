@@ -1,5 +1,5 @@
 
-package com.codeup.springblog;
+package com.codeup.springblog.controller;
 
 
 import org.springframework.stereotype.Controller;

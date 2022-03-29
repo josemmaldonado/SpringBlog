@@ -4,14 +4,14 @@
 <body>
 <nav th:replace="partials :: navbar"></nav>
 
-<form action="/posts/create" method="post">
+<form th:action="@{/posts/create/}" th:method="post" th:object="${post}">
     Title:
-    <input name="title" />
+    <input for="postTitle" th:field="*{title}" id="title" />
     <br />
 
     <div class="form-group">
         <label for="exampleFormControlTextarea1">Body</label>
-        <textarea class="form-control" id="exampleFormControlTextarea1" rows="3"></textarea>
+        <textarea class="form-control" id="exampleFormControlTextarea1" th:field="*{body}" rows="3"></textarea>
     </div>
     <input type="submit">
 </form>

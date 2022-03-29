@@ -9,6 +9,16 @@
 <nav th:replace="partials :: navbar"></nav>
 
 This be my show page. Shown up
+<div th:each="individualPost: ${individualPost}">
+    <h1 th:text="${individualPost.title}"/>
+    <p th:text="${individualPost.body}"/>
+    <form th:action=" '/posts/edit/' + ${individualPost.getId()}" method="get">
+        <button class="btn btn-primary">Edit</button>
+    </form>
+    <form th:action="'/posts/delete/' + ${individualPost.getId()}" method="post">
+        <button class="btn btn-danger">Delete</button>
+    </form>
+</div>
 <script th:replace="partials::script"/>
 </body>
 </html>

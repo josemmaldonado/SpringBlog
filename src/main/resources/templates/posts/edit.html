@@ -5,16 +5,16 @@
 <nav th:replace="partials :: navbar"></nav>
 
 
-<form action="/posts/edit/" method="post">
+<form th:action="@{/posts/edit/}" th:method="post" th:object="${post}">
     Title:
-    <input name="postTitle" th:value="${postToEdit.getTitle()}" />
+    <input th:field="*{postTitle}" th:value="${postToEdit.getTitle()}" />
 
     <br />
 
     <div class="form-group">
         <label for="exampleFormControlTextarea1">Body</label>
         <input class="form-control" id="exampleFormControlTextarea1" rows="3"
-        name="postBody" th:value="${postToEdit.getBody()}" />
+        th:field="*{postBody}" th:value="${postToEdit.getBody()}" />
         <input name="postId" type="hidden" th:value="${postToEdit.getId()}">
     </div>
     <button type="submit" class="btn btn-primary">Edit</button>

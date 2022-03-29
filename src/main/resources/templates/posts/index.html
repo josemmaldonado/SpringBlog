@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html xmlns:th="http://www.thymeleaf.org">
+<html xmlns:th="http://www.thymeleaf.org" xmlns="http://www.w3.org/1999/html">
 
     <head th:replace="partials :: head"/>
 
@@ -8,6 +8,7 @@
 <div th:each="post: ${posts}">
 <h1 th:text="${post.title}"/>
 <p th:text="${post.body}"/>
+    Post written by:<span th:text="${post.getUsername().getEmail()}"></span>
    <form th:action=" '/posts/edit/' + ${post.getId()}" method="get">
     <button class="btn btn-primary">Edit</button>
    </form>
